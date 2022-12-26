@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "c3699dc20bff594ad0eb",
-    "url": "/souf-portfolio/static/css/main.5ed09568.chunk.css"
+    "revision": "f9da63df6ec52da98a50",
+    "url": "/souf-portfolio/static/css/main.08e06aaf.chunk.css"
   },
   {
-    "revision": "c3699dc20bff594ad0eb",
-    "url": "/souf-portfolio/static/js/main.c3699dc2.chunk.js"
+    "revision": "f9da63df6ec52da98a50",
+    "url": "/souf-portfolio/static/js/main.f9da63df.chunk.js"
   },
   {
     "revision": "3c11774c00c8fe3168dd",
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/souf-portfolio/static/media/logo.06e73328.svg"
   },
   {
-    "revision": "790a01f9dfe4bc31c3bd10b12014e98e",
+    "revision": "87a27131445b3a40a36feabe64383d08",
     "url": "/souf-portfolio/index.html"
   }
 ];
