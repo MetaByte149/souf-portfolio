@@ -120,6 +120,7 @@ class Game extends React.Component {
       history: this.state.history.slice(0, step + 1),
       stepNumber: step,
       xIsNext: step % 2 === 0,
+      winner: null,
     });
   }
 }
