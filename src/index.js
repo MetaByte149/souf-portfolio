@@ -3,8 +3,9 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 
 function Square(props) {
+  const className = props.isNewestMove ? "square bold" : "square";
   return (
-    <button className="square" onClick={props.onClick}>
+    <button className={className} onClick={props.onClick}>
       {props.value}
     </button>
   );
@@ -16,6 +17,7 @@ class Board extends React.Component {
       <Square
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
+        isNewestMove={this.props.lastMoveIndex === i}
       />
     );
   }
@@ -93,6 +95,9 @@ class Game extends React.Component {
           <Board
             squares={current.squares}
             onClick={(index) => this.handleClick(index)}
+            lastMoveIndex={
+              this.state.playedMoves[this.state.playedMoves.length - 1]
+            }
           />
         </div>
         <div className="game-info">
