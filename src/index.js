@@ -5,7 +5,7 @@ import "./index.css";
 function Square(props) {
   const className = props.isNewestMove ? "square bold" : "square";
   return (
-    <button className={className} onClick={props.onClick}>
+    <button key={props.index} className={className} onClick={props.onClick}>
       {props.value}
     </button>
   );
@@ -15,6 +15,8 @@ class Board extends React.Component {
   renderSquare(i) {
     return (
       <Square
+        key={i}
+        index={i}
         value={this.props.squares[i]}
         onClick={() => this.props.onClick(i)}
         isNewestMove={this.props.lastMoveIndex === i}
@@ -30,7 +32,11 @@ class Board extends React.Component {
         cols.push(this.renderSquare(i * 3 + j));
       }
 
-      rows.push(<div className="board-row">{cols}</div>);
+      rows.push(
+        <div key={i} className="board-row">
+          {cols}
+        </div>
+      );
     }
     return <div>{rows}</div>;
   }
@@ -50,6 +56,7 @@ class Game extends React.Component {
       winner: null,
       stepNumber: 0,
       playedMoves: [],
+      ascendingButtons: true,
     };
   }
 
@@ -70,15 +77,26 @@ class Game extends React.Component {
       const playedMoveIndex = this.state.playedMoves[move];
       const col = playedMoveIndex % 3;
       const row = Math.floor(playedMoveIndex / 3);
+
       return (
         <li key={move}>
           <button onClick={() => this.jumpTo(move)}>
-            {" "}
-            {`${desc} \t played move: (${col}, ${row})`}{" "}
+            {`${desc} \t played move: (${col}, ${row})`}
           </button>
         </li>
       );
     });
+
+    if (!this.state.ascendingButtons) moves.reverse();
+
+    const changeorderButtonText = this.state.ascendingButtons
+      ? "Ascending"
+      : "Descending";
+    const changeorderButton = (
+      <button key={-1} onClick={() => this.changeOrder()}>
+        Change order. Currently: {changeorderButtonText}
+      </button>
+    );
 
     return (
       <div className="game">
@@ -95,6 +113,7 @@ class Game extends React.Component {
           <div>{this.state.stepNumber + 1}</div>
 
           <div>{status}</div>
+          <div>{changeorderButton}</div>
           <ol>{moves}</ol>
         </div>
       </div>
@@ -125,6 +144,12 @@ class Game extends React.Component {
       stepNumber: step,
       xIsNext: step % 2 === 0,
       winner: null,
+    });
+  }
+
+  changeOrder() {
+    this.setState({
+      ascendingButtons: !this.state.ascendingButtons,
     });
   }
 }
